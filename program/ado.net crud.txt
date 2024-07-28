@@ -1,0 +1,73 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Data;
+public partial class insertform : System.Web.UI.Page
+{
+    SqlConnection con;
+    SqlCommand cmd;
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+       con =new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\Database.mdf;Integrated Security=True");
+       con.Open();
+    }
+  
+    protected void Button1_Click1(object sender, EventArgs e)
+    {
+        string q = "insert into Persons(name,age) values('" + TextBox2.Text + "'," + TextBox3.Text + ")";
+        cmd = new SqlCommand(q, con);
+        cmd.ExecuteNonQuery();
+        Response.Write("Record inserted");
+    }
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        TextBox2.Text = "";
+        TextBox3.Text = "";
+    }
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        string q = "select * from Persons where id=" + TextBox4.Text;
+            cmd = new SqlCommand(q, con);
+
+            SqlDataReader rd = cmd.ExecuteReader();
+           if(rd.Read())
+           {
+               TextBox2.Text = rd["Name"].ToString();
+               TextBox3.Text = rd["Age"].ToString();
+
+           }
+           else
+           {
+               Response.Write("not found");
+               TextBox2.Text = "";
+               TextBox3.Text = "";
+
+           }
+    }
+    protected void Button4_Click(object sender, EventArgs e)
+    {
+        string q = "update Persons set Name='" + TextBox2.Text + "',Age=" + TextBox3.Text + " where id=" + TextBox4.Text;
+
+        cmd = new SqlCommand(q, con);
+        cmd.ExecuteNonQuery();
+
+
+        Response.Write("record updated");
+
+    }
+    protected void Button5_Click(object sender, EventArgs e)
+    {
+        string q="delete from Persons where id="+
+        TextBox4.Text;
+
+        cmd=new SqlCommand(q,con);
+        cmd.ExecuteNonQuery();
+
+        Response.Write("record deleted");
+    }
+}

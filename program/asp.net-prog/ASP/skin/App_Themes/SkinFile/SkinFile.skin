@@ -1,0 +1,2 @@
+﻿<asp:TextBox runat="server" BackColor="#AABBCCDD" BorderStyle="Solid" Font-Bold="True" Font-Names="Arial Narrow" Font-Size="Medium" SkinID="t1"></asp:TextBox>
+<asp:Label SkinID="l1" runat="server" BorderStyle="Dashed" BorderWidth="1px" Font-Bold="True"></asp:Label>

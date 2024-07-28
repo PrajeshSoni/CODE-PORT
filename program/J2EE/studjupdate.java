@@ -1,0 +1,54 @@
+import java.io.*;
+import java.sql.*;
+class studjupdate
+{
+	public static void main(String ar[])
+	{
+		Connection cn;
+		Statement st,st1;
+		ResultSet rs;//To display the record
+		int no,no1;
+		String nm,ct,q,nm1;
+		try
+		{
+			Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");//load the driver class
+			cn=DriverManager.getConnection("jdbc:odbc:studdemo2022");
+			st=cn.createStatement(); 
+			st1=cn.createStatement();
+			nm=ar[0];//radhika
+			no=Integer.parseInt(ar[1]);//1
+			nm1=ar[2];//2
+			ct=ar[3];//2
+			q="update student set id="+no+",fname='"+nm1+"',fcity='"+ct+"' where fname='"+nm+"'";
+			st.executeUpdate(q);
+			System.out.println("Record updated");
+			q="select * from student";
+			rs=st1.executeQuery(q);//It will execute select query
+			System.out.println("No\tName\t\t\tCity");
+			while(rs.next())
+			{
+				no=rs.getInt(1);
+				nm=rs.getString(2);
+				ct=rs.getString(3);
+				System.out.println(no+"\t"+nm+"\t\t\t"+ct);
+			}
+			rs.close();
+			st1.close();
+			cn.close();
+			st.close();
+			
+		}
+		catch(ClassNotFoundException ce)
+		{
+			System.out.println("Class not found: "+ce);
+		}
+		catch(SQLException se)
+		{
+			System.out.println("SQL ERROR: "+se);
+		}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+	}
+}

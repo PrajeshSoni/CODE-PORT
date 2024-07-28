@@ -1,0 +1,21 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<form id="form1" runat="server">
+    <asp:Label ID="Label1" runat="server" Font-Bold="True" Font-Size="Larger" Font-Underline="True" ForeColor="#990000" Text="S J VARMORA BBA &amp; BCA  MAHILA COLLEGE"></asp:Label>
+    <br />
+    <br />
+    <asp:Menu ID="Menu1" runat="server" Height="52px" Orientation="Horizontal" RenderingMode="Table" Width="493px">
+        <Items>
+            <asp:MenuItem NavigateUrl="~/home.aspx" Text="HOME" Value="HOME"></asp:MenuItem>
+            <asp:MenuItem NavigateUrl="~/about us.aspx" Text="ABOUT US" Value="ABOUT US"></asp:MenuItem>
+            <asp:MenuItem NavigateUrl="~/contact us.aspx" Text="CONTACT US" Value="CONTACT US"></asp:MenuItem>
+            <asp:MenuItem NavigateUrl="~/ragistration form.aspx" Text="REGISTRATION FORM" Value="REGISTRATION FORM"></asp:MenuItem>
+        </Items>
+    </asp:Menu>
+    <br />
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+    </asp:ContentPlaceHolder>
+    <br />
+</form>
+
+
