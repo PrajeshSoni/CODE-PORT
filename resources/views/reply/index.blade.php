@@ -125,7 +125,6 @@
 
         <div class="shadow p-3 mb-5 bg-white rounded">
             <h1 class="heading">{{ __('messages.Reply') }}</h1>
-            <hr>
             @foreach ($replies as $replies)
                 <div class="card mt-2">
                     <div class="mt">

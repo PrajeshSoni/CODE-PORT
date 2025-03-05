@@ -49,7 +49,6 @@
             </div>
 
 
-
             <button type="submit" class="btn btn-default">{{ __('messages.submit') }}</button>
             <a href="{{ route('question.show') }}" class="btn btn-default">{{ __('messages.showdata') }}</a>
 
