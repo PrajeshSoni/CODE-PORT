@@ -72,5 +72,9 @@ class RegisterController extends Controller
             'u_age' => $data['u_age'],
             'password' => Hash::make($data['password']),
         ]);
+        $user->assignRole('User'); // Replace 'default_role' with the actual role name
+
+        return $user;
+        dd($user);
     }
 }

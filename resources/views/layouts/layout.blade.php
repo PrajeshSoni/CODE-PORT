@@ -95,10 +95,10 @@ Author URL: http://w3layouts.com
                         @else
                             <li><a href="{{ route('home') }}" class="nav-link">home</a></li>
                             <li><a href="{{ route('code.about') }}" class="nav-link">About</a></li>
-                            <li><a href="{{ route('code.contact') }}" class="nav-link">contact</a></li>
-                            <li><a href="{{ route('feedback.create') }}" class="nav-link">feedback</a></li>
                             <li><a class="nav-link" href="{{ route('tag.show') }}">{{ __('messages.tag') }}</a></li>
                             <li><a class="nav-link" href="{{ route('question.show') }}">{{ __('messages.Questions') }}</a>
+                            <li><a href="{{ route('code.contact') }}" class="nav-link">contact</a></li>
+                            <li><a href="{{ route('feedback.create') }}" class="nav-link">feedback</a></li>
                             </li>
                             <li class="nav-item dropdown">
                             </li>

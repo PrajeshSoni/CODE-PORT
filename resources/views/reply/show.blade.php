@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
     <div class="container-fluid">
-        <h2>Tags</h2>
+        <h2>Replies</h2>
 
 
         <table class="table table-bordered">

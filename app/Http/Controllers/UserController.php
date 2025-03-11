@@ -63,9 +63,9 @@ class UserController extends Controller
 
         $input = $request->all();
         $input['password'] = FacadesHash::make($input['password']);
-        $user = User::create($input);
-        $user->assignRole($request->input('roles'));
-
+        // $user = User::create($input);
+        // $user->assignRole($request->input('roles'));
+        dd($input);
         return redirect()->route('users.index')
             ->with('success', 'User created successfully');
     }
