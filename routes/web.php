@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\EnrolleruserController;
 use App\Http\Controllers\feedbackcontroller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -12,6 +14,7 @@ use App\Http\Controllers\LangController;
 use App\Http\Controllers\Registerusercontrolletr;
 use App\Http\Controllers\ReplyController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\SubcourseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -74,7 +77,34 @@ route::post("/reply/store", [ReplyController::class, 'store'])->name('reply.stor
 route::get("/reply/show", [ReplyController::class, 'show'])->name('reply.show');
 route::get("/reply/delete/{id?}", [ReplyController::class, 'delete'])->name('reply.delete');
 
+// currses  routes
+route::get("/courses/index", [CourseController::class, 'index'])->name('courses.index');
+route::get("/courses/create", [CourseController::class, 'create'])->name('courses.create');
+route::post("/courses/store", [CourseController::class, 'store'])->name('courses.store');
+route::get("/courses/edit/{id?}", [CourseController::class, 'edit'])->name('courses.edit');
+route::post("/courses/update", [CourseController::class, 'update'])->name('courses.update');
+route::post("/courses/delete/{id?}", [CourseController::class, 'destroy'])->name('courses.delete');
+route::get("/courses/show/{id?}", [CourseController::class, 'show'])->name('courses.show');
 
+//subcourses routes
+route::get("/subcourses/index", [SubcourseController::class, 'index'])->name('subcourses.index');
+route::get("/subcourses/create/{id?}", [SubcourseController::class, 'create'])->name('subcourses.create');
+route::post("/subcourses/store", [SubcourseController::class, 'store'])->name('subcourses.store');
+route::get("/subcourses/edit/{id?}", [SubcourseController::class, 'edit'])->name('subcourses.edit');
+route::post("/subcourses/update", [SubcourseController::class, 'update'])->name('subcourses.update');
+route::post("/subcourses/delete/{id?}", [SubcourseController::class, 'destroy'])->name('subcourses.delete');
+route::get("/subcourses/show/{id?}", [SubcourseController::class, 'show'])->name('subcourses.show');
+
+
+// enrollers routes
+route::get("/enrollers/index", [EnrolleruserController::class, 'index'])->name('enrollers.index');
+route::get("/enrollers/create", [EnrolleruserController::class, 'create'])->name('enrollers.create');
+route::post("/enrollers/store", [EnrolleruserController::class, 'store'])->name('enrollers.store');
+route::get("/enrollers/edit/{id?}", [EnrolleruserController::class, 'edit'])->name('enrollers.edit');
+route::post("/enrollers/update", [EnrolleruserController::class, 'update'])->name('enrollers.update');
+route::post("/enrollers/delete/{id?}", [EnrolleruserController::class, 'destroy'])->name('enrollers.delete');
+route::get("/enrollers/show/{id?}", [EnrolleruserController::class, 'show'])->name('enrollers.show');
+route::post("/enroller/store", [EnrolleruserController::class, 'store'])->name('enroller.store');
 
 
 route::get("/code/about", [HomeController::class, 'About'])->name('code.about');

@@ -44,10 +44,6 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto"></ul>
-
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -57,6 +53,35 @@
                         @else
                             @if (auth()->check())
                                 @if (auth()->user()->isAdministrator())
+                                    <li><a class="nav-link" href="{{ route('tag.index') }}">{{ __('messages.tag') }}</a>
+                                    </li>
+                                    <li><a class="nav-link"
+                                            href="{{ route('question.index') }}">{{ __('messages.Questions') }}</a></li>
+                                    <li><a class="nav-link"
+                                            href="{{ route('reply.show') }}">{{ __('messages.Reply') }}</a></li>
+                                    <li><a class="nav-link" href="{{ route('courses.index') }}">Courses</a></li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                                            data-bs-toggle="dropdown">
+                                            {{ Auth::user()->name }}
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ route('users.index') }}"
+                                                    class="dropdown-item">{{ __('messages.Users') }}</a></li>
+                                            <li><a href=" {{ route('roles.index') }}"
+                                                    class="dropdown-item">{{ __('messages.Roles') }}</a></li>
+                                            <li> <a class="dropdown-item" href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                                    {{ __('Logout') }}
+                                                </a></li>
+                                        </ul>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                @elseif (auth()->user()->isManger())
                                     <li><a class="nav-link" href="{{ route('tag.index') }}">{{ __('messages.tag') }}</a>
                                     </li>
                                     <li><a class="nav-link"
@@ -83,47 +108,57 @@
                                             style="display: none;">
                                             @csrf
                                         </form>
-                    </div>
-                    </li>
-                @else
-                    <li><a class="nav-link" href="{{ route('tag.show') }}">{{ __('messages.tag') }}</a></li>
-                    <li><a class="nav-link" href="{{ route('question.show') }}">{{ __('messages.Questions') }}</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                            {{ Auth::user()->name }}
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ route('users.profile') }}"
-                                    class="dropdown-item">{{ __('messages.Profile') }}</a></li>
-                            <li> <a class=" dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                                document.getElementById('logout-form').submit();">
-                                    {{ __('messages.Logout') }}
-                                </a></li>
-                        </ul>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
+                                    </li>
+                                @else
+                                    <li>
+                                        <a class="nav-link" href="{{ route('tag.show') }}">{{ __('messages.tag') }}</a>
+                                    </li>
+                                    <li>
+                                        <a class="nav-link"
+                                            href="{{ route('question.show') }}">{{ __('messages.Questions') }}</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                                            data-bs-toggle="dropdown">
+                                            {{ Auth::user()->name }}
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="{{ route('users.profile') }}"
+                                                    class="dropdown-item">{{ __('messages.Profile') }}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class=" dropdown-item" href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();  document.getElementById('logout-form').submit();">
+                                                    {{ __('messages.Logout') }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                @endif
+                            @endif
+                        @endguest
+                    </ul>
                 </div>
-                </li>
-                @endif
-                @endif
-            @endguest
-            </ul>
-    </div>
 
-    <div class="col-2justify-content-end">
-        <strong>Language:</strong>
-    </div>
-    <div class="col-2">
-        <select class="form-control changeLang justify-content-end">
-            <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
-            <option value="gu" {{ session()->get('locale') == 'gu' ? 'selected' : '' }}>Gujarati</option>
-            <option value="hn" {{ session()->get('locale') == 'hn' ? 'selected' : '' }}>Hindi</option>
-        </select>
-    </div>
-    </div>
-    </nav>
+                <div class="col-2justify-content-end">
+                    <strong>Language:</strong>
+                </div>
+                <div class="col-2">
+                    <select class="form-control changeLang justify-content-end">
+                        <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English
+                        </option>
+                        <option value="gu" {{ session()->get('locale') == 'gu' ? 'selected' : '' }}>Gujarati
+                        </option>
+                        <option value="hn" {{ session()->get('locale') == 'hn' ? 'selected' : '' }}>Hindi</option>
+                    </select>
+                </div>
+            </div>
+        </nav>
     </div>
 
     <div style="margin-top: 50px;">

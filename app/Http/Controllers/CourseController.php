@@ -4,42 +4,60 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
-
+use App\Models\Subcourse;
+use App\Models\Tag;
 
 class CourseController extends Controller
 {
     public function index()
     {
-        return view('courses.index');
+        $courses = Course::all();
+        return view('courses.index', compact('courses'));
     }
-    public function show($course)
+    public function show($id)
     {
-        return view('courses.show', ['course' => $course]);
+        $course = Course::join('tags', 'courses.tag_id', '=', 'tags.id')
+            ->select('courses.*', 'tags.t_title')
+            ->where('courses.id', $id)
+            ->first();
+        $subcoures = Subcourse::join('courses', 'subcourses.course_id', '=', 'courses.id')
+            ->select('subcourses.*', 'courses.title')
+            ->where('subcourses.course_id', $id)
+            ->get();
+        return view('courses.show', compact('course', 'subcoures'));
     }
     public function create()
     {
-        return view('courses.create');
+        $tags = Tag::all();
+        return view('courses.create', compact('tags'));
     }
     public function store()
     {
         $course = new Course();
-        $course->name = request('name');
+        $course->title = request('title');
+        $course->tag_id = request('tag_id');
         $course->save();
-        return redirect('/courses');
+        return redirect()->route('courses.index')
+            ->with('success', 'Course created successfully.');
     }
-    public function edit($course)
+    public function edit($id)
     {
-        return view('courses.edit', ['course' => $course]);
+        $course = Course::find($id);
+        $tags = Tag::all();
+        return view('courses.edit', compact('course', 'tags'));
     }
     public function update($course)
     {
         $course->name = request('name');
         $course->save();
-        return redirect('/courses/' . $course->id);
+        return redirect()->route('courses.index')
+            ->with('success', 'Course updated successfully');
     }
-    public function destroy($course)
+    public function destroy($id)
     {
+        $course = Course::find($id);
         $course->delete();
-        return redirect('/courses');
+        return redirect()->route('courses.index')
+            ->with('success', 'Course deleted successfully.');
     }
 }

@@ -13,10 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('enrollerusers', function (Blueprint $table) {
+        Schema::create('subcourses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
+            $table->foreignId('course_id')->constrained()->onDelete('cascade');
+            $table->string('title');
+            $table->string('description');
+            $table->string('video');
+            $table->time('duration');
+            $table->string('document_url');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('enrollerusers');
+        Schema::dropIfExists('subcourses');
     }
 };
