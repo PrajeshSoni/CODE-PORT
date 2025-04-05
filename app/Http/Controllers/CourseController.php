@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\Enrolleruser;
 use App\Models\Subcourse;
 use App\Models\Tag;
 
@@ -12,7 +13,12 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::all();
-        return view('courses.index', compact('courses'));
+        $enrollerUser = Enrolleruser::join('users', 'enrollerusers.user_id', '=', 'users.id')
+            ->join('courses', 'enrollerusers.course_id', '=', 'courses.id')
+            ->select('enrollerusers.*', 'users.name as user_name', 'courses.title as course_title')
+            ->get();
+        // dd($enrollerUser);
+        return view('courses.index', compact('courses', 'enrollerUser'));
     }
     public function show($id)
     {
@@ -24,6 +30,8 @@ class CourseController extends Controller
             ->select('subcourses.*', 'courses.title')
             ->where('subcourses.course_id', $id)
             ->get();
+
+        // dd($enrolleruser);
         return view('courses.show', compact('course', 'subcoures'));
     }
     public function create()
@@ -33,9 +41,19 @@ class CourseController extends Controller
     }
     public function store()
     {
+
         $course = new Course();
         $course->title = request('title');
         $course->tag_id = request('tag_id');
+
+        //add file upload
+        $file = request()->file('course_image');
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('Coureses_image'), $filename);
+
+        $course->course_image = $filename;
+        $course->description = request('description');
+
         $course->save();
         return redirect()->route('courses.index')
             ->with('success', 'Course created successfully.');

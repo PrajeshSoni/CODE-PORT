@@ -91,65 +91,93 @@ Author URL: http://w3layouts.com
                                                     style="display: none;">
                                                     @csrf
                                                 </form>
-                            </div>
-                            </li>
-                        @else
-                            <li><a href="{{ route('home') }}" class="nav-link">home</a></li>
-                            <li><a href="{{ route('code.about') }}" class="nav-link">About</a></li>
-                            <li><a class="nav-link" href="{{ route('tag.show') }}">{{ __('messages.tag') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('question.show') }}">{{ __('messages.Questions') }}</a>
-                            <li><a href="{{ route('code.contact') }}" class="nav-link">contact</a></li>
-                            <li><a href="{{ route('feedback.create') }}" class="nav-link">feedback</a></li>
-                            </li>
-                            <li class="nav-item dropdown">
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                                    {{ Auth::user()->name }}
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="{{ route('users.profile') }}"
-                                            class="dropdown-item">{{ __('messages.Profile') }}</a></li>
-                            </li>
-                            <li> <a class=" dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
+                                            </li>
+                                        @elseif(auth()->user()->isManager())
+                                            <li><a href="{{ route('home') }}" class="nav-link">home</a></li>
+                                            <li><a class="nav-link"
+                                                    href="{{ route('tag.show') }}">{{ __('messages.tag') }}</a>
+                                            </li>
+                                            <li><a class="nav-link"
+                                                    href="{{ route('question.show') }}">{{ __('messages.Questions') }}</a>
+                                            </li>
+                                            <li><a class="nav-link"
+                                                    href="{{ route('reply.show') }}">{{ __('messages.Reply') }}</a>
+                                            </li>
+                                            <li><a class="nav-link" href="{{ route('courses.index') }}">Courses</a>
+                                            </li>
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                                    data-bs-toggle="dropdown">
+                                                    {{ Auth::user()->name }}
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="{{ route('users.profile') }}"
+                                                            class="dropdown-item">{{ __('messages.Profile') }}</a>
+                                                    </li>
+                                                    <li> <a class="dropdown-item" href="{{ route('logout') }}"
+                                                            onclick="event.preventDefault();
                                                                             document.getElementById('logout-form').submit();">
-                                    {{ __('messages.Logout') }}
-                                </a>
-                            </li>
+                                                            {{ __('messages.Logout') }}
+                                                        </a>
+                                                </ul>
+                                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                    style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </li>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                                style="display: none;">
+                                                @csrf
+                                            </form>
+                                            </li>
+                                        @else
+                                            <li><a href="{{ route('home') }}" class="nav-link">home</a></li>
+                                            <li><a href="{{ route('code.about') }}" class="nav-link">About</a></li>
+                                            <li><a class="nav-link" href="{{ route('courses.index') }}">Courses</a></li>
+                                            <li><a class="nav-link"
+                                                    href="{{ route('question.show') }}">{{ __('messages.Questions') }}</a>
+                                            <li><a href="{{ route('code.contact') }}" class="nav-link">contact</a></li>
+                                            <li><a href="{{ route('feedback.create') }}" class="nav-link">feedback</a>
+                                            </li>
+                                            </li>
+                                            <li class="nav-item dropdown">
+                                            </li>
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href="#" role="button"
+                                                    data-bs-toggle="dropdown">
+                                                    {{ Auth::user()->name }}
+                                                </a>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="{{ route('users.profile') }}"
+                                                            class="dropdown-item">{{ __('messages.Profile') }}</a></li>
+                                            </li>
+                                            <li> <a class=" dropdown-item" href="{{ route('logout') }}"
+                                                    onclick="event.preventDefault();
+                                                                            document.getElementById('logout-form').submit();">
+                                                    {{ __('messages.Logout') }}
+                                                </a>
+                                            </li>
+                                            
 
+                                </ul>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
+                                @endif
+                                @endif
+                            @endguest
 
                             </ul>
-                            <li class="nav-item dropdown">
-                                <select class="form-control changeLang nav-link dropdown-toggle" role="button"
-                                    data-bs-toggle="dropdown">
-                                    <option class=" dropdown-item" value="en"
-                                        {{ session()->get('locale') == 'en' ? 'selected' : '' }}>English</option>
-                                    <option class=" dropdown-item" value="gu"
-                                        {{ session()->get('locale') == 'gu' ? 'selected' : '' }}>Gujarati</option>
-                                    <option class=" dropdown-item" value="hn"
-                                        {{ session()->get('locale') == 'hn' ? 'selected' : '' }}>Hindi</option>
-                                </select>
-                            </li>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                style="display: none;">
-                                @csrf
-                            </form>
                         </div>
-                        </li>
-                        @endif
-                        @endif
-                    @endguest
-
-                    </ul>
-        </div>
-        <form action="#" method="post" class="d-flex searchhny-form">
-            <input type="search" placeholder="Search Here..." required="required">
-            <button type="submit"><span class="fa fa-search" aria-hidden="true"></span></button>
-        </form>
-        </div>
-        </nav>
-        </header>
+                        <form action="#" method="post" class="d-flex searchhny-form">
+                            <input type="search" placeholder="Search Here..." required="required">
+                            <button type="submit"><span class="fa fa-search" aria-hidden="true"></span></button>
+                        </form>
+                    </div>
+                </nav>
+            </header>
         </div>
     </section>
 

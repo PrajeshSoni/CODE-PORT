@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('subcourses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('course_id')->constrained()->onDelete('cascade');
+            $table->foreignId('course_id')->constrained('courses')->onDelete('cascade');
             $table->string('title');
             $table->string('description');
             $table->string('video');

@@ -1,4 +1,3 @@
-{{-- filepath: c:\Users\ASUS\OneDrive\Desktop\Codeport\codeport\resources\views\subcourses\create.blade.php --}}
 @extends('layouts.layout')
 @section('content')
     <div class="container">

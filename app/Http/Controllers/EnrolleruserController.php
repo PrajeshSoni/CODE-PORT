@@ -8,12 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class EnrolleruserController extends Controller
 {
-    public function store()
+    public function store($id)
     {
+
         $enrolleruser = new Enrolleruser();
         $enrolleruser->user_id = Auth::user()->id;
-        $enrolleruser->course_id  = request('course_id');
+        $enrolleruser->course_id = $id;
+        // dd($enrolleruser);
         $enrolleruser->save();
-        return redirect('Course.index');
+
+        return redirect()->route('Course.index'); // Use route helper for better readability
     }
 }

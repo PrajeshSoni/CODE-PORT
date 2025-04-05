@@ -147,10 +147,6 @@
                 font-size: 20px;
             }
 
-
-
-
-
             .card-body {
                 flex: 1 1 auto;
             }
@@ -162,52 +158,51 @@
             }
         </style>
     </head>
+    <div class="container d-flex justify-content-between">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Filter
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ route('question.show') }}" type="button">ALL</a></li>
+                @foreach ($tags as $tags)
+                    <li> <a class="dropdown-item" type="button"
+                            href={{ route('question.show', $tags->id) }}>{{ $tags->t_title }}</a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+        <div class="col-md-2 text-end">
+            @can('Question-create')
+                <a href="{{ route('question.create') }}" class="btn btn-success text-right"> {{ __('messages.Ask') }}
+                </a>
+            @endcan
+        </div>
+    </div>
     <div class="container">
         <div style="margin-top: 50px;">
-
             <div class="row">
-                <div class="col-md-3">
-                    <div class="sidebar">
-                        <a href={{ route('question.show') }}>ALL</a>
-
-                        @foreach ($tags as $tags)
-                            <a href={{ route('question.show', $tags->id) }}>{{ $tags->t_title }}</a>
-                        @endforeach
-                    </div>
-                </div>
-
-                <div class="col-md-7">
-                    <div class="row">
-                        @foreach ($questionshow as $questionshow)
-                            <div class="col-md-6">
-
-                                <div class="card mt-2">
-                                    <div class="card-header">
-                                        {{ $questionshow->q_title }}
-                                    </div>
-                                    <div class="card-body">
-                                        <p class="card-text">{{ $questionshow->q_body }}.</p>
-                                        <h5 class="card-title">{{ $questionshow->t_title }}</h5>
-                                        <br>
-                                        <a href="{{ route('reply.index', $questionshow->id) }}" class="btn btn-primary"
-                                            type="button">{{ __('messages.Read') }}</a>
-
-                                    </div>
-                                </div>
+                @foreach ($questionshow as $questionshow)
+                    <div class="col-md-4">
+                        <div class="card mt-2">
+                            <div class="card-header">
+                                {{ $questionshow->q_title }}
                             </div>
-                        @endforeach
+                            <div class="card-body">
+                                <p class="card-text">{{ $questionshow->q_body }}.</p>
+                                <h5 class="card-title">{{ $questionshow->t_title }}</h5>
+                                <br>
+                                <a href="{{ route('reply.index', $questionshow->id) }}" class="btn btn-primary"
+                                    type="button">{{ __('messages.Read') }}</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-
-                <div class="col-md-2 text-end">
-                    @can('Question-create')
-                        <a href="{{ route('question.create') }}" class="btn btn-success text-right"> {{ __('messages.Ask') }}
-                        </a>
-                    @endcan
-                </div>
+                @endforeach
             </div>
-
-
         </div>
+        {{-- <div class="d-flex justify-content-center">
+            {!! $questionshow->withQueryString()->links('pagination::bootstrap-5') !!}
+            {{ $->links('pagination::bootstrap-5') }}
+        </div> --}}
     </div>
 @stop

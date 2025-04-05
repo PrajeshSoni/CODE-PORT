@@ -96,13 +96,14 @@ class QuestionController extends Controller
         $tags = Tag::all();
 
         $questionshow = Question::join('tags', 'questions.t_id', 'tags.id')
-
-            ->get(['questions.*', 'tags.t_title']);
+            ->select('questions.*', 'tags.t_title')
+            ->get();
 
         if ($id != 0) {
             $questionshow = Question::join('tags', 'questions.t_id', 'tags.id')
                 ->where('tags.id', '=', $id)
-                ->get(['questions.*', 'tags.t_title']);
+                ->select('questions.*', 'tags.t_title')
+                ->get();
         }
 
         return view('Question.show', compact('tags', 'questionshow'));

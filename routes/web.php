@@ -99,7 +99,7 @@ route::get("/subcourses/show/{id?}", [SubcourseController::class, 'show'])->name
 // enrollers routes
 route::get("/enrollers/index", [EnrolleruserController::class, 'index'])->name('enrollers.index');
 route::get("/enrollers/create", [EnrolleruserController::class, 'create'])->name('enrollers.create');
-route::post("/enrollers/store", [EnrolleruserController::class, 'store'])->name('enrollers.store');
+Route::post('/enrolleruser/store/{id?}', [EnrolleruserController::class, 'store'])->name('enrollers.store');
 route::get("/enrollers/edit/{id?}", [EnrolleruserController::class, 'edit'])->name('enrollers.edit');
 route::post("/enrollers/update", [EnrolleruserController::class, 'update'])->name('enrollers.update');
 route::post("/enrollers/delete/{id?}", [EnrolleruserController::class, 'destroy'])->name('enrollers.delete');
