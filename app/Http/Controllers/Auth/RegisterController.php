@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -69,7 +70,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'b_date' => $data['b_date'],
             'p_no' => $data['p_no'],
-            'u_age' => $data['u_age'],
+
+            'u_age' => Carbon::parse($data['b_date'])->age,
             'password' => Hash::make($data['password']),
         ]);
         $user->assignRole('User'); // Replace 'default_role' with the actual role name

@@ -12,9 +12,14 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-body">
+                                            <img src="{{ asset('Coureses_image/' . $course['course_image']) }}"
+                                                class="card-img-top" alt="Course Image">
                                             <h5 class="card-title">
                                                 <a href="{{ route('courses.show', $course->id) }}">{{ $course->title }}</a>
                                             </h5>
+                                            <p class="card-text">
+                                                {{ $course['description'] }}
+                                            </p>
                                             <p class="card-text">{{ $course->teg_id }}</p>
                                             <a href="{{ route('courses.edit', $course->id) }}"
                                                 class="btn btn-primary">Edit</a>
@@ -42,10 +47,15 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-body">
+                                            <img src="{{ asset('Coureses_image/' . $course['course_image']) }}"
+                                                class="card-img-top" alt="Course Image">
                                             <h5 class="card-title
                                     "><a
                                                     href="{{ route('courses.show', $course->id) }}">{{ $course->title }}</a>
                                             </h5>
+                                            <p class="card-text">
+                                                {{ $course['description'] }}
+                                            </p>
                                             <p class="card-text">{{ $course->teg_id }}</p>
                                             <a href="{{ route('courses.edit', $course->id) }}"
                                                 class="btn btn-primary">Edit</a>
@@ -74,20 +84,22 @@
                                         <p class="card-text">
                                             {{ $course['description'] }}
                                         </p>
-                                        @foreach ($enrollerUser as $enrollerUser)
-                                            @if ($enrollerUser->course_id == $course->id)
-                                                <a href="{{ route('courses.show', $course->id) }}"
-                                                    class="btn btn-primary w-100 mt-2">Show Your Course</a>
-                                            @else
-                                                <form action="{{ route('enrollers.store', $course->id) }}" method="POST">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-primary w-100 mt-2">Enroll
-                                                        Now</button>
-                                                </form>
-                                            @endif
-                                        @endforeach
-
-
+                                        @php
+                                            $isEnrolled = $enrollerUser->contains(function ($enroller) use ($course) {
+                                                return $enroller->user_id == auth()->user()->id &&
+                                                    $enroller->course_id == $course->id;
+                                            });
+                                        @endphp
+                                        @if ($isEnrolled)
+                                            <a href="{{ route('courses.show', $course->id) }}"
+                                                class="btn btn-primary w-100 mt-2">Show Your Course</a>
+                                        @else
+                                            <form action="{{ route('enrollers.store', $course->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-primary w-100 mt-2">Enroll
+                                                    Now</button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
