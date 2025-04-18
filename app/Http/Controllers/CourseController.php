@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Enrolleruser;
 use App\Models\Subcourse;
 use App\Models\Tag;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends Controller
 {
@@ -30,9 +31,9 @@ class CourseController extends Controller
             ->select('subcourses.*', 'courses.title')
             ->where('subcourses.course_id', $id)
             ->get();
-
-        // dd($enrolleruser);
-        return view('courses.show', compact('course', 'subcoures'));
+        $enrollmentCount = DB::table('enrollerusers')->where('course_id', $id)->count();
+        // dd($enrollmentCount);
+        return view('courses.show', compact('course', 'subcoures', 'enrollmentCount'));
     }
     public function create()
     {

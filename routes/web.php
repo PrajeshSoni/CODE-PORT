@@ -91,8 +91,8 @@ route::get("/subcourses/index", [SubcourseController::class, 'index'])->name('su
 route::get("/subcourses/create/{id?}", [SubcourseController::class, 'create'])->name('subcourses.create');
 route::post("/subcourses/store", [SubcourseController::class, 'store'])->name('subcourses.store');
 route::get("/subcourses/edit/{id?}", [SubcourseController::class, 'edit'])->name('subcourses.edit');
-route::post("/subcourses/update", [SubcourseController::class, 'update'])->name('subcourses.update');
-route::post("/subcourses/delete/{id?}", [SubcourseController::class, 'destroy'])->name('subcourses.delete');
+route::put("/subcourse/update{id?}", [SubcourseController::class, 'update'])->name('subcourse.update');
+route::delete("/subcourse/delete/{id?}", [SubcourseController::class, 'destroy'])->name('subcourse.delete');
 route::get("/subcourses/show/{id?}", [SubcourseController::class, 'show'])->name('subcourses.show');
 
 
@@ -117,9 +117,6 @@ Route::get('lang/change', [LangController::class, 'change'])->name('changeLang')
 
 route::get("/feedback/create", [feedbackcontroller::class, 'create'])->name('feedback.create');
 route::post("/feedback/store", [feedbackcontroller::class, 'store'])->name('feedback.store');
-
-
-
 
 Route::get('send-mail', function () {
 

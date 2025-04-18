@@ -33,8 +33,6 @@
                                 </div>
                             @endforeach
                         </div>
-
-
                     </div>
                 </div>
             @elseif (auth()->user()->isManager())

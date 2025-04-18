@@ -157,14 +157,24 @@ Author URL: http://w3layouts.com
                                                     {{ __('messages.Logout') }}
                                                 </a>
                                             </li>
-                                            
-
                                 </ul>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                     style="display: none;">
                                     @csrf
                                 </form>
+                                {{-- <div class="col-2">
+                                    <select class="form-control changeLang justify-content-end">
+                                        <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>
+                                            English
+                                        </option>
+                                        <option value="gu" {{ session()->get('locale') == 'gu' ? 'selected' : '' }}>
+                                            Gujarati
+                                        </option>
+                                        <option value="hn" {{ session()->get('locale') == 'hn' ? 'selected' : '' }}>
+                                            Hindi</option>
+                                    </select>
+                                </div> --}}
                                 @endif
                                 @endif
                             @endguest

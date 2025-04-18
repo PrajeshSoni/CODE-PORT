@@ -28,10 +28,6 @@
                 <textarea class="form-control" id="description" placeholder="Enter description" name="description" required></textarea>
             </div>
             <div class="form-group">
-                <label for="video">Video File:</label>
-                <input type="file" class="form-control" id="video" name="video" required>
-            </div>
-            <div class="form-group">
                 <label for="duration">Duration:</label>
                 <input type="text" class="form-control" id="duration" placeholder="Enter duration" name="duration"
                     required>
