@@ -7,15 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Feedback extends Model
 {
-    public $table = "feedbacks";
-    protected $guarded = [];
-    protected $with = ['roundups'];
-    public function getRouteKeyName()
+    use HasFactory;
+    protected $fillable = [
+        'f_name',
+        'user_id',
+        'message',
+    ];
+    public function user()
     {
-        return 'slug';
-    }
-    public function roundups()
-    {
-        return $this->hasMany(Roundup::class);
+        return $this->belongsTo(User::class);
     }
 }

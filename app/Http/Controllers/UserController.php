@@ -58,10 +58,18 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            'roles' => 'required',
+            'b_date' => 'required|date',
+            'p_no' => 'required|numeric'
         ]);
+
         $input = $request->all();
         $input['password'] = FacadesHash::make($input['password']);
+        $input['age'] = \Carbon\Carbon::parse($input['b_date'])->age;
+
+        $user = User::create($input);
+        $user->assignRole($request->input('roles')); // Assign roles to the user
+
         return redirect()->route('users.index')
             ->with('success', 'User created successfully');
     }
@@ -106,7 +114,8 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'same:confirm-password',
-
+            'b_date' => 'required|date',
+            'phone_number' => 'required|numeric'
         ]);
 
         $input = $request->all();
@@ -116,12 +125,13 @@ class UserController extends Controller
             $input = Arr::except($input, array('password'));
         }
 
+        $input['age'] = \Carbon\Carbon::parse($input['b_date'])->age;
+
         $user = User::find($id);
         $user->update($input);
         FacadesDB::table('model_has_roles')->where('model_id', $id)->delete();
 
         $user->assignRole($request->input('roles'));
-
 
         return redirect()->route('users.index')
             ->with('success', 'User updated successfully');
@@ -144,6 +154,7 @@ class UserController extends Controller
 
         $id = Auth::user()->id;
         $users = User::find($id);
+        $users->age = \Carbon\Carbon::parse($users->bdate)->age; // Ensure age is calculated dynamically
         return view('users.profile', compact('users'));
     }
 }

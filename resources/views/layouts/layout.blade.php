@@ -70,6 +70,7 @@ Author URL: http://w3layouts.com
                                             <li><a class="nav-link"
                                                     href="{{ route('reply.show') }}">{{ __('messages.Reply') }}</a></li>
                                             <li><a class="nav-link" href="{{ route('courses.index') }}">Courses</a></li>
+                                            <li><a class="nav-link" href="{{ route('feedback.index') }}">Feedback</a></li>
 
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="#" role="button"

@@ -114,9 +114,14 @@ route::get("/code/contact", [HomeController::class, 'contact'])->name('code.cont
 Route::get('lang/home', [LangController::class, 'index']);
 Route::get('lang/change', [LangController::class, 'change'])->name('changeLang');
 
-
+route::get("/feedback/index", [feedbackcontroller::class, 'index'])->name('feedback.index');
 route::get("/feedback/create", [feedbackcontroller::class, 'create'])->name('feedback.create');
 route::post("/feedback/store", [feedbackcontroller::class, 'store'])->name('feedback.store');
+route::get("/feedback/edit/{id?}", [feedbackcontroller::class, 'edit'])->name('feedback.edit');
+route::put("/feedback/update/{id?}", [feedbackcontroller::class, 'update'])->name('feedback.update');
+route::get("/feedback/delete/{id?}", [feedbackcontroller::class, 'delete'])->name('feedback.delete');
+route::get("/feedback/show/{id?}", [feedbackcontroller::class, 'show'])->name('feedback.show');
+Route::delete("/feedback/destroy/{id?}", [feedbackcontroller::class, 'destroy'])->name('feedback.destroy');
 
 Route::get('send-mail', function () {
 

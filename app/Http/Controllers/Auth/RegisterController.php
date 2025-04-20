@@ -65,18 +65,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'b_date' => $data['b_date'],
             'p_no' => $data['p_no'],
-
             'u_age' => Carbon::parse($data['b_date'])->age,
             'password' => Hash::make($data['password']),
         ]);
-        $user->assignRole('User'); // Replace 'default_role' with the actual role name
 
-        return $user;
-        dd($user);
+        $user->assignRole('User'); // Assign default role 'User' to the newly registered user
+
+        return $user; // Return the User instance
     }
 }
