@@ -99,13 +99,14 @@ Author URL: http://w3layouts.com
                                                     href="{{ route('tag.show') }}">{{ __('messages.tag') }}</a>
                                             </li>
                                             <li><a class="nav-link"
-                                                    href="{{ route('question.show') }}">{{ __('messages.Questions') }}</a>
+                                                    href="{{ route('question.index') }}">{{ __('messages.Questions') }}</a>
                                             </li>
                                             <li><a class="nav-link"
                                                     href="{{ route('reply.show') }}">{{ __('messages.Reply') }}</a>
                                             </li>
                                             <li><a class="nav-link" href="{{ route('courses.index') }}">Courses</a>
                                             </li>
+                                            <li><a class="nav-link" href="{{ route('feedback.index') }}">Feedback</a></li>
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                                     data-bs-toggle="dropdown">
@@ -164,18 +165,18 @@ Author URL: http://w3layouts.com
                                     style="display: none;">
                                     @csrf
                                 </form>
-                                {{-- <div class="col-2">
-                                    <select class="form-control changeLang justify-content-end">
-                                        <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>
-                                            English
-                                        </option>
-                                        <option value="gu" {{ session()->get('locale') == 'gu' ? 'selected' : '' }}>
-                                            Gujarati
-                                        </option>
-                                        <option value="hn" {{ session()->get('locale') == 'hn' ? 'selected' : '' }}>
-                                            Hindi</option>
-                                    </select>
-                                </div> --}}
+                                    {{-- <div class="col-2">
+                                        <select class="form-control changeLang justify-content-end">
+                                            <option value="en" {{ session()->get('locale') == 'en' ? 'selected' : '' }}>
+                                                English
+                                            </option>
+                                            <option value="gu" {{ session()->get('locale') == 'gu' ? 'selected' : '' }}>
+                                                Gujarati
+                                            </option>
+                                            <option value="hn" {{ session()->get('locale') == 'hn' ? 'selected' : '' }}>
+                                                Hindi</option>
+                                        </select>
+                                    </div> --}}
                                 @endif
                                 @endif
                             @endguest
